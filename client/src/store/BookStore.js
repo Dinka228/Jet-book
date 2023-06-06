@@ -2,20 +2,18 @@ import {makeAutoObservable} from "mobx";
 
 export default class BookStore {
     constructor() {
-        this._isAuth = false
-        this._role = ''
+        this._themes = [{id:1,name:'Book1',creator:"Teacher1"},
+            {id:2,name:'Book2',creator:"Teacher2"},
+            {id:3,name:'Book3',creator:"Teacher3"},
+            {id:4,name:'Book4',creator:"Teacher4"},
+            {id:5,name:'Book5',creator:"Teacher5"},
+        ]
         makeAutoObservable(this)
     }
-    setIsAuth(bool){
-        this._isAuth = bool
+    setThemes(themes){
+        this._themes = themes
     }
-    get isAuth(){
-        return this._isAuth
-    }
-    setRole(role){
-        this._role = role
-    }
-    get role(){
-        return this._role
+    get themes(){
+        return this._themes
     }
 }

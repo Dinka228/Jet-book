@@ -2,8 +2,9 @@ import React, {useContext, useState} from 'react';
 import {useHistory} from "react-router-dom";
 import {observer} from "mobx-react-lite";
 import {
+    MDBBtn,
     MDBCollapse,
-    MDBContainer, MDBIcon,
+    MDBContainer, MDBDropdown, MDBDropdownItem, MDBDropdownMenu, MDBDropdownToggle, MDBIcon,
     MDBNavbar,
     MDBNavbarBrand,
     MDBNavbarItem,
@@ -11,10 +12,13 @@ import {
     MDBNavbarNav,
     MDBNavbarToggler
 } from "mdb-react-ui-kit";
-import {Button, Container, Nav, Navbar, NavLink} from "react-bootstrap";
+import {Button, Container, Dropdown, Nav, Navbar, NavLink} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Context} from "../index";
 import {LOGIN_ROUTE, MAIN_ROUTE, DAY_ROUTE} from "../utils/consts";
+import DropdownItem from "react-bootstrap/DropdownItem";
+import DropdownToggle from "react-bootstrap/DropdownToggle";
+
 
 
 const NavBar = observer(() => {
@@ -25,28 +29,23 @@ const NavBar = observer(() => {
     const history = useHistory()
     const {user} = useContext(Context)
     const {projects} = useContext(Context)
-    return (
-        <Navbar bg="dark" expand="lg"><Container>
-                    <Navbar.Brand  style={{cursor:"pointer", color:"white"}}
-                    >Jet-Book</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto" >
-                        </Nav>
-                        <Nav className="ms-auto" onClick={()=>{
-                            user.setIsAuth(false)
-                            history.push(LOGIN_ROUTE)
-                        }
-                        }>
-                            <Nav.Link style={{color:"white"}}
-                            >
-                                Exit
-                            </Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container> : <div></div>
+    const [showBasic, setShowBasic] = useState(false);
 
-        </Navbar>
+    return (
+        <MDBNavbar expand='lg' light style={{backgroundColor:"grey"}}>
+            <MDBContainer fluid>
+                <MDBNavbarBrand className='m-auto'>JetBook</MDBNavbarBrand>
+                    <MDBDropdown className='m-auto'>
+                        <MDBDropdownToggle tag='a' className='nav-link' role='button'>
+                            Select Role
+                        </MDBDropdownToggle>
+                        <MDBDropdownMenu>
+                            <MDBDropdownItem link>Teacher</MDBDropdownItem>
+                            <MDBDropdownItem link>Student</MDBDropdownItem>
+                        </MDBDropdownMenu>
+                    </MDBDropdown>
+            </MDBContainer>
+        </MDBNavbar>
     );
 })
 
