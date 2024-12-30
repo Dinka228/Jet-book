@@ -1,10 +1,10 @@
-const {User} = require("../models/models");
+const {User, Chapter} = require("../models/models");
 const {Catalog} = require("../models/models");
 
 class CatalogController{
     async create(req,res){
-        const {userId,chapterId} = req.body
-        const catalog = await Catalog.create({userId,chapterId})
+        const {userId,chapterId,themesId,chapterName,themesName} = req.body
+        const catalog = await Catalog.create({userId,chapterId,themesId,chapterName,themesName})
         return res.json(catalog)
     }
     async getAll(req,res){
@@ -13,6 +13,12 @@ class CatalogController{
             where:{userId}
         })
         return res.json(catalog)
+    }
+    async delete(req,res){
+        const {catalogId} = req.params
+        const deleteCatalog = await Catalog.destroy({where:{id:catalogId}})
+
+        return res.json(deleteCatalog)
     }
     // async finishTask(req,res){
     //     const {id,curatorId} = req.params

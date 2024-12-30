@@ -9,7 +9,11 @@ const userRouter = require('./userRouter')
 const readThemesRouter = require('./readThemesRouter')
 const testRouter = require('./testRouter')
 const subjectRouter = require('./subjectRouter')
+const planRouter = require('./planRouter')
 const themesRouter = require('./themesRouter')
+const chapterContentRouter = require('./chapterContentRouter')
+const resultStudentRouter = require('./resultStudentRouter')
+const glossaryRouter = require('./glossaryRouter')
 
 
 
@@ -21,7 +25,11 @@ router.use('/answer',answerRouter)
 router.use('/catalog',catalogRouter)
 router.use('/chapter',chapterRouter)
 router.use('/subject',subjectRouter)
+router.use('/plan',planRouter)
 router.use('/readChapter',readChapterRouter)
 router.use('/readThemes',readThemesRouter)
+router.use('/chapterContent',chapterContentRouter)
+router.use('/resultStudent',resultStudentRouter)
+router.use('/glossary',glossaryRouter)
 
 module.exports = router

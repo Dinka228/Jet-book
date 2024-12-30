@@ -17,7 +17,7 @@ export const authRoutes = [
         Component: Main
     },
     {
-        path: BOOK_ROUTE  + '/:id',
+        path: BOOK_ROUTE,
         Component: Book
     },
     {
@@ -36,7 +36,7 @@ export const publicRoutes = [
         Component: Main
     },
     {
-        path: BOOK_ROUTE  + '/:id',
+        path: BOOK_ROUTE,
         Component: Book
     },
     {

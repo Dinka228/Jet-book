@@ -12,6 +12,11 @@ class SubjectController{
         const subj = await Subject.findAll()
         return res.json(subj)
     }
+    async getAllMySubject(req,res){
+        const {speciality} = req.params
+        const subj = await Subject.findAll({where: {speciality: speciality}})
+        return res.json(subj)
+    }
     // async finishTask(req,res){
     //     const {id,curatorId} = req.params
     //     const task = await Task.findOne({

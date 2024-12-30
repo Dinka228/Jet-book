@@ -9,6 +9,9 @@ import {Spinner} from "react-bootstrap";
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {check, fetchAllStudents, fetchAllTeachers} from "./http/userAPI";
+import {fetchMySubject} from "./http/subjectAPI";
+import {fetchCatalog} from "./http/catalogAPI";
 const App =()=> {
     const [editorState, setEditorState] = useState(
         () => EditorState.createEmpty(),
@@ -16,20 +19,25 @@ const App =()=> {
   const {user} = useContext(Context)
   const {book} = useContext(Context)
   const [loading,setLoading]=useState(true)
-  // useEffect(()=>{
-  //   setTimeout(()=>{
-  //     check().then(data=>{
-  //       user.setCurrentUser(data)
-  //       fetchOneTask(user.currUser.id).then(data=>calendar.setTasks(data))
-  //       console.log(user.users)
-  //       user.setIsAuth(true)
-  //     }).finally(()=>setLoading(false))
-  //   },2000)
-  //
-  // },[])
-  // if(loading){
-  //   return <Spinner animation={"grow"}/>
-  // }
+  useEffect(()=>{
+      check().then(data=>{
+        user.setCurrUser(data)
+        user.setIsAuth(true)
+          fetchCatalog(user.currUser.id).then(data=>{
+              book.setCatalog(data)})
+          fetchMySubject(user.currUser.speciality).then(data=>{
+              book.setSubject(data)})
+          if(user.currUser.role === 'Student'){
+              fetchAllTeachers().then(data=>{
+                  user.setTeachers(data)
+                  console.log(user.teachers)
+              })
+          }
+          else if(user.currUser.role === 'Teacher'){
+              fetchAllStudents().then(data=>user.setStudents(data))
+          }
+      })
+  },[])
   return (
       <BrowserRouter>
         <div>

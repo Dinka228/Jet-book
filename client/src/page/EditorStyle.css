@@ -26,3 +26,7 @@
 .bookImageStyle{
     width:100%;
 }
+.maxWidth{
+    position: absolute;
+    flex-grow:1
+}

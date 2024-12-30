@@ -4,6 +4,8 @@ const testController = require('../controllers/testController')
 const checkRole = require('../middleware/checkRoleMiddleware')
 
 router.post('/',testController.create)
-router.get('/:subjId',testController.getAll)
+router.get('/:chapterId',testController.getAll)
+router.get('/getAllTeachers/:creatorId',testController.getAllTeachersTest)
+router.get('/getAllThemesTest/:themesId',testController.getAllThemesTest)
 
 module.exports = router

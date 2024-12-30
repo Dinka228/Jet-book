@@ -3,8 +3,8 @@ const {Answer} = require("../models/models");
 
 class AnswerController{
     async create(req,res){
-        const {text,taskId} = req.body
-        const answer = await Answer.create({text,taskId})
+        const {text,taskId,correct} = req.body
+        const answer = await Answer.create({text,taskId,correct})
         return res.json(answer)
     }
     async getAll(req,res){

@@ -1,17 +1,28 @@
-const {User} = require("../models/models");
+const {User, Chapter} = require("../models/models");
 const {Themes} = require("../models/models");
 
 class ThemesController{
     async create(req,res){
-        const {name,subjId} = req.body
-        const theme = await Themes.create({name,subjId})
+        const {name,subjId,creatorName,creatorId} = req.body
+        const theme = await Themes.create({name,subjId,creatorName,creatorId})
         return res.json(theme)
     }
-    async getAll(req,res){
+    async getAllSubjThemes(req,res){
         const {subjId} = req.params
         const theme = await Themes.findAll({
             where:{subjId}
         })
+        return res.json(theme)
+    }
+    async getAllTeacherThemes(req,res){
+        const {fullName} = req.params
+        const theme = await Themes.findAll({
+            where:{creatorName:fullName}
+        })
+        return res.json(theme)
+    }
+    async getAll(req,res){
+        const theme = await Themes.findAll()
         return res.json(theme)
     }
     // async finishTask(req,res){
@@ -31,5 +42,12 @@ class ThemesController{
 
         return res.json(updateTheme)
     }
+    async delete(req,res){
+        const {themesId} = req.params
+        const deleteTheme = await Themes.destroy({where:{id:themesId}})
+
+        return res.json(deleteTheme)
+    }
+
 }
 module.exports = new ThemesController()

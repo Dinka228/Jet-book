@@ -31,5 +31,11 @@ class ChapterController{
 
         return res.json(updateChapter)
     }
+    async delete(req,res){
+        const {chapterId} = req.params
+        const deleteChapter = await Chapter.destroy({where:{id:chapterId}})
+
+        return res.json(deleteChapter)
+    }
 }
 module.exports = new ChapterController()

@@ -5,5 +5,6 @@ const checkRole = require('../middleware/checkRoleMiddleware')
 
 router.post('/',subjectController.create)
 router.get('/',subjectController.getAll)
+router.get('/mySubj/:speciality',subjectController.getAllMySubject)
 
 module.exports = router

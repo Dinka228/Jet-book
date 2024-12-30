@@ -1,22 +1,27 @@
 import {$authHost,$host} from "./index";
-import jwt_decode from 'jwt-decode'
 
 export const registration = async(email,password,fullName,speciality,group,department)=>{
-    const {data} = await $host.post('api/user/registration',{email,password,fullName,speciality,group,department})
-    localStorage.setItem('token',data.token)
-    return jwt_decode(data.token)
+    const {data} = await $host.post('user/registration',{email,password,fullName,speciality,group,department})
+    localStorage.setItem('id',data.id)
+    return data
 }
 export const login = async(email,password)=>{
-    const {data} = await $host.post('api/user/login',{email,password})
-    localStorage.setItem('token',data.token)
-    return jwt_decode(data.token)
+    const {data} = await $host.post('user/login',{email,password})
+    console.log(data)
+    localStorage.setItem('id',data.id)
+    return data
 }
 export const check = async()=>{
-    const {data} = await $authHost.get('api/user/auth')
-    localStorage.setItem('token',data.token)
-    return jwt_decode(data.token)
+    const {data} = await $host.post('user/check')
+
+    localStorage.setItem('id',data.id)
+    return data
 }
-export const fetchUser = async()=>{
-    const {data} = await $host.get('api/user/user')
+export const fetchAllStudents = async()=>{
+    const {data} = await $host.get('user/getAllStudents')
+    return data
+}
+export const fetchAllTeachers = async()=>{
+    const {data} = await $host.get('user/getAllTeachers')
     return data
 }
